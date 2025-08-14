@@ -13,7 +13,6 @@ class Url extends Model
         'clicks'
     ];
 
-    // Short code generate करने के लिए
     public static function generateShortCode(): string
     {
         do {
@@ -23,7 +22,6 @@ class Url extends Model
         return $shortCode;
     }
 
-    // Full shortened URL get करने के लिए
     public function getShortenedUrlAttribute(): string
     {
         return url($this->short_code);

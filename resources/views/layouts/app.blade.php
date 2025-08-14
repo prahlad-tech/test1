@@ -22,8 +22,7 @@
 </head>
 <body class="min-h-screen transition-colors duration-300" x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }" 
       :class="{ 'dark bg-gray-900': darkMode, 'bg-gray-50': !darkMode }">
-    
-    <!-- Navigation -->
+
     <nav class="glass border-b" :class="{ 'border-gray-700': darkMode, 'border-gray-200': !darkMode }">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
@@ -43,7 +42,6 @@
                         <i class="fas fa-chart-bar mr-1"></i>Analytics
                     </a>
                     
-                    <!-- Dark mode toggle -->
                     <button @click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)" 
                             class="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
                         <i class="fas fa-moon" x-show="!darkMode"></i>
@@ -54,12 +52,10 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="flex-1">
         @yield('content')
     </main>
 
-    <!-- Footer -->
     <footer class="glass border-t mt-12" :class="{ 'border-gray-700': darkMode, 'border-gray-200': !darkMode }">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div class="text-center" :class="{ 'text-gray-400': darkMode, 'text-gray-600': !darkMode }">
@@ -69,7 +65,6 @@
     </footer>
 
     <script>
-        // Set up CSRF token for all AJAX requests
         window.axios = axios;
         window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
         const token = document.head.querySelector('meta[name="csrf-token"]');

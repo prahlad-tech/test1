@@ -15,13 +15,11 @@
 <body class="gradient-bg min-h-screen">
     <div class="container mx-auto px-4 py-12">
         
-        <!-- Header -->
         <div class="text-center mb-12">
             <h1 class="text-5xl font-bold text-white mb-4">URL Shortener</h1>
             <p class="text-xl text-gray-200">Make long URLs short and easy to share</p>
         </div>
 
-        <!-- URL Form -->
         <div class="max-w-2xl mx-auto bg-white bg-opacity-20 rounded-lg p-8 mb-8">
             <form id="urlForm" class="space-y-6">
                 <div>
@@ -39,7 +37,6 @@
             </form>
         </div>
 
-        <!-- Result -->
         <div id="result" class="max-w-2xl mx-auto bg-white bg-opacity-20 rounded-lg p-8 hidden">
             <h3 class="text-2xl font-bold text-white mb-4 text-center">Your Shortened URL:</h3>
             
@@ -59,7 +56,6 @@
     </div>
 
     <script>
-        // Form submit handle करने के लिए
         document.getElementById('urlForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -78,7 +74,6 @@
                 const data = await response.json();
                 
                 if (data.success) {
-                    // Result show करो
                     document.getElementById('shortenedUrl').value = data.shortened_url;
                     document.getElementById('result').classList.remove('hidden');
                 }
@@ -88,7 +83,6 @@
             }
         });
 
-        // Copy functionality
         function copyUrl() {
             const urlInput = document.getElementById('shortenedUrl');
             urlInput.select();

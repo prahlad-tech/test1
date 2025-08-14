@@ -7,23 +7,19 @@ use Illuminate\Http\Request;
 
 class UrlController extends Controller
 {
-    // Main page दिखाने के लिए
     public function index()
     {
         return view('welcome');
     }
 
-    // URL shorten करने के लिए  
     public function store(Request $request)
     {
-        // Validation
         $request->validate([
             'url' => 'required|url|max:2048'
         ]);
 
         $originalUrl = $request->input('url');
         
-        // Check करो कि URL already exists या नहीं
         $existingUrl = Url::where('original_url', $originalUrl)->first();
         
         if ($existingUrl) {
@@ -34,7 +30,6 @@ class UrlController extends Controller
             ]);
         }
 
-        // नया short URL बनाओ
         $url = Url::create([
             'original_url' => $originalUrl,
             'short_code' => Url::generateShortCode()
@@ -47,7 +42,6 @@ class UrlController extends Controller
         ]);
     }
 
-    // Redirect करने के लिए
     public function redirect($shortCode)
     {
         $url = Url::where('short_code', $shortCode)->first();
@@ -56,7 +50,6 @@ class UrlController extends Controller
             abort(404, 'URL not found');
         }
 
-        // Click count बढ़ाओ
         $url->increment('clicks');
 
         return redirect($url->original_url);
